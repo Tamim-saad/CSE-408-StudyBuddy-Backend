@@ -1,0 +1,45 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  sonarqube:
+    name: SonarQube
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install root dependencies
+        run: npm install
+
+      - name: Install backend dependencies
+        run: cd backend && npm install
+
+      - name: Install frontend dependencies
+        run: cd frontend && npm install
+
+      - name: Test and coverage
+        run: npm test
+      - name: Run Snyk security test
+        run: npm run test:security
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}  
+      - name: Install Sonar Scanner
+        run: npm install -g sonar-scanner
+
+      - name: SonarCloud Scan
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=Learnathon-By-Geeky-Solutions_bytefixers \
+            -Dsonar.organization=learnathon-by-geeky-solutions \
+            -Dsonar.sources=backend,frontend \
+            -Dsonar.tests=backend/tests \
+            -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

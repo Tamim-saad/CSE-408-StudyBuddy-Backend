@@ -2,12 +2,12 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { LoginForm, SignupForm } from "../components/auth";
 import AppBar from "../components/appbar/AppBar";
 import Sidebar from "../components/Board/sidebar/sidebar";
-import { Dashboard } from "../components/project";
+import { Dashboard } from "../components/project/Dashboard";
 import { UserProfile } from "../components/auth/UserProfile";
 import propTypes from "prop-types";
-const KanbanLayout = () => {
+const Layout = () => {
   return (
-    <div className="kanban-layout flex">
+    <div className="flex">
       <Sidebar />
       <Outlet />
       {/* This is where the nested route (ProjectCreate) will render */}
@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <KanbanLayout />,
+    element: <Layout />,
     children: [
       {
         path: "dashboard",

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Typography, IconButton } from "../../common/icons";
-import { ProjectCreate } from "./recentProjects";
-import { PersonalTaskStats } from "./PersonalTaskStats";
-import { TeamWorkload } from "./TeamWorkload";
+// import { ProjectCreate } from "./recentProjects";
+// import { PersonalTaskStats } from "./PersonalTaskStats";
+// import { TeamWorkload } from "./TeamWorkload";
 import { useMembers } from "../../context/MembersContext";
 
 export const Dashboard = () => {
@@ -93,27 +93,6 @@ export const Dashboard = () => {
         </div>
       </div>
 
-      {/* Key dashboard components with keys to force re-render */}
-      <div
-        key={`personal-stats-${lastRefreshed.getTime()}`}
-        className="mb-8 mx-10"
-      >
-        <PersonalTaskStats />
-      </div>
-
-      <div
-        key={`team-workload-${lastRefreshed.getTime()}`}
-        className="mb-8 mx-10"
-      >
-        <TeamWorkload />
-      </div>
-
-      <div
-        key={`project-create-${lastRefreshed.getTime()}`}
-        className="mb-8 mx-10"
-      >
-        <ProjectCreate />
-      </div>
     </div>
   );
 };

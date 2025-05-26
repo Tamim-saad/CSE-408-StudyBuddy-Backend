@@ -19,7 +19,6 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 
 import { amber } from "@mui/material/colors";
 import React, { useState } from "react";
-import { ProjectModal } from "../../project/recentProjects/ProjectModal";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Sidebar = () => {
@@ -193,10 +192,6 @@ const Sidebar = () => {
           </div>
         </div>
       </Drawer>
-      <ProjectModal
-        isOpen={isProjectModalOpen}
-        onRequestClose={handleCloseProjectModal}
-      />
     </>
   );
 };
